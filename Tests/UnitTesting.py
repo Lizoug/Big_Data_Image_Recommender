@@ -19,11 +19,16 @@ import sqlite3
 #path = os.getcwd()
 #sys.path.append(r"C:\Users\magra\Documents\HSD\4_Semester\Big_Data\Image_Recommender")
 
-from image_recommender_cleaned_18 import euclidean_distance, manhattan_distance, \
+"""from image_recommender_cleaned_18 import euclidean_distance, manhattan_distance, \
     cosine_similarity, build_faiss_index, find_similar_images_faiss, calculate_histogram, \
-        load_dataframes, get_paths_from_db, find_all_similarities
+        load_dataframes, get_paths_from_db, find_all_similarities"""
 
-# from cleam_code_generator_test_17 import *
+from distance import euclidean_distance, manhattan_distance, cosine_similarity
+from image_similarity import find_similar_images_faiss, find_all_similarities
+from data_management import build_faiss_index
+from image_processing import calculate_histogram
+from data_management import load_dataframes
+from database import get_paths_from_db
 
 # Tests: Euclidean distance, Manhattan distance, Cosine similarity
 # Generate dummy data for the input for the test functions
@@ -76,7 +81,7 @@ def test_manhattan_distance(df, test_color, top_n):
 
     print("manhattan_distance test passed!")
 
-def test_cosine_distance(df, test_color, top_n):
+def test_cosine_similarity(df, test_color, top_n):
     df_copy = df.copy()  # Create a copy of the dataframe
     
     # Call the euclidean_distance function
@@ -259,7 +264,7 @@ def run_tests():
     test_manhattan_distance(df, color_values, 3)
     
     print("Test cosine_distance")
-    test_cosine_distance(df, color_values, 3)
+    test_cosine_similarity(df, color_values, 3)
     
     print("Test find_similar_images_faiss")
     test_find_similar_images_faiss()

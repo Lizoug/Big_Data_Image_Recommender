@@ -1,6 +1,6 @@
 from image_similarity import update_paths_in_df, find_all_similarities
 from data_management import load_dataframes
-from plots import display_images
+from plots import display_input_and_similar_images
 
 # Global variables
 img_width, img_height = 224, 224
@@ -21,7 +21,7 @@ def main():
     similar_image_paths = get_paths_from_db(connection, similar_image_ids)
     
     # Display images
-    display_images("test.jpg", similar_image_paths)
+    display_input_and_similar_images("test.jpg", similar_image_paths)
 
 if __name__ == '__main__':
     main()

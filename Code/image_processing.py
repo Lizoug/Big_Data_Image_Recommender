@@ -1,5 +1,5 @@
 import cv2
-from keras.applications.mobilenet import MobileNet, preprocess_input
+from keras.applications.mobilenet import preprocess_input
 import numpy as np
 
 

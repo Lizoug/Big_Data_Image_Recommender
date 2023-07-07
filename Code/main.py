@@ -1,6 +1,8 @@
-from image_similarity import update_paths_in_df, find_all_similarities
+from image_similarity import find_all_similarities
 from data_management import load_dataframes
 from plots import display_input_and_similar_images
+import sqlite3
+from database import get_paths_from_db
 
 # Global variables
 img_width, img_height = 224, 224

@@ -1,11 +1,10 @@
 import cv2
 from tensorflow.keras.applications import MobileNet
-from tensorflow.keras.applications.mobilenet import preprocess_input
 from image_processing import get_image_embedding, calculate_histogram
 from data_management import build_faiss_index
-from data_management import embeddings_df, path_df,  hsv_df, rgb_df
+from data_management import embeddings_df, hsv_df, rgb_df
 from distance import euclidean_distance, manhattan_distance, cosine_similarity
-from plots import display_input_and_similar_images
+import numpy as np
 
 
 def find_similar_images_faiss(index, embeddings_df, test_image_embedding, top_n):

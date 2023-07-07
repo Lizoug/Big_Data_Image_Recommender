@@ -1,6 +1,7 @@
 from PIL import Image
 import matplotlib.pyplot as plt
 
+
 def display_input_and_similar_images(input_image_path, similar_image_paths):
     plt.figure(figsize=(20, 10))
     img = Image.open(input_image_path)

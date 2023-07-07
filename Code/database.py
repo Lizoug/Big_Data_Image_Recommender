@@ -1,5 +1,5 @@
 import sqlite3
-from sqlite3 import Error
+from pandas import pd
 
 
 def get_paths_from_db(connection, ids):
@@ -8,6 +8,7 @@ def get_paths_from_db(connection, ids):
         df = pd.read_sql(f'SELECT * FROM paths WHERE ID = {id}', connection)
         paths.append(df['Path'].values[0])
     return paths
+
 
 def save_to_sqlite(df, db_name, table_name):
     conn = sqlite3.connect(db_name)

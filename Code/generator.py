@@ -4,15 +4,9 @@ from tensorflow.keras.applications.mobilenet import preprocess_input
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 import pandas as pd
-import imageio
-import glob
 import os
 import cv2
 from tqdm.auto import tqdm
-import time
-import faiss
-import matplotlib.pyplot as plt
-from PIL import Image
 
 
 img_width, img_height = 224, 224

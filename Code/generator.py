@@ -1,3 +1,25 @@
+from image_processing import calculate_histogram
+from tensorflow.keras.applications import MobileNet
+from tensorflow.keras.applications.mobilenet import preprocess_input
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+import numpy as np
+import pandas as pd
+import imageio
+import glob
+import os
+import cv2
+from tqdm.auto import tqdm
+import time
+import faiss
+import matplotlib.pyplot as plt
+from PIL import Image
+
+
+img_width, img_height = 224, 224
+train_data_dir = "E:\images"
+batch_size = 100
+
+
 def generator_to_extract_image_features():
     Image_paths = []
     hsv = []

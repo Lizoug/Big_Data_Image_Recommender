@@ -26,7 +26,6 @@ from image_recommender_cleaned_18 import euclidean_distance, manhattan_distance,
 # from cleam_code_generator_test_17 import *
 
 # Tests: Euclidean distance, Manhattan distance, Cosine similarity
-
 # Generate dummy data for the input for the test functions
 n_rows = 5
 ids = np.arange(n_rows)
@@ -93,8 +92,7 @@ def test_cosine_distance(df, test_color, top_n):
 
     print("cosine_distance test passed!")
 
-# Tests: faiss module
-
+# Tests: functions associated with faiss module
 def test_find_similar_images_faiss():
     # Generate some random data for testing
     embeddings_df = pd.DataFrame({
@@ -138,7 +136,6 @@ def test_build_faiss_index():
     print("build_faiss_index test passed!")
 
 # Test: calculating histogram
-
 def test_calculate_histogram():
     # Dummy data
     hsv_image = np.random.randint(0, 256, (224, 224, 3), dtype=np.uint8)
@@ -157,7 +154,6 @@ def test_calculate_histogram():
     print("calculate_histogram test passed!")
 
 # Test: Load dataframe from pickle file
-
 def test_load_dataframes():
     # Call the load_dataframes function
     embeddings_df, hsv_df, rgb_df = load_dataframes()
@@ -185,7 +181,6 @@ def test_load_dataframes():
     print("load_dataframes test passed!")
 
 # Test: Load image paths from database
-
 def test_get_paths_from_db():
     # Create a connection to the SQLite database
     connection = sqlite3.connect('paths_db_test.sqlite')
@@ -211,7 +206,6 @@ def test_get_paths_from_db():
     print("Get_paths_from_db test passed!")
 
 # Test: Find similarities between input image and dataset images
-
 def test_find_all_similarities():
     test_image_path = "test_image.jpg"
     top_n = 5
@@ -254,7 +248,6 @@ def test_find_all_similarities():
     print("find_all_similarities test passed!")
 
 # Run all tests at once
-
 def run_tests():
     # print messages indicating which test is being run
     # then execute the test function

@@ -18,11 +18,13 @@ def get_image_embedding(image_path, model):
 
 def calculate_histogram(image, color_mode):
     if color_mode == "hsv":
-        hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
-        hist = cv2.calcHist([hsv_image], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+        hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)  # BGR to HSV
+        hist = cv2.calcHist([hsv_image], [0, 1, 2], None, [8,8,8], [0, 256, 0, 256, 0, 256])
         hist = cv2.normalize(hist, hist).flatten()  # normalize and flatten the histogram
-    if color_mode == "rgb":
-        image = cv2.convertScaleAbs(image, alpha=(255/1))
-        hist = cv2.calcHist([image], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+    elif color_mode == "rgb":
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)  # BGR to RGB
+        hist = cv2.calcHist([rgb_image], [0, 1, 2], None, [8,8,8], [0, 256, 0, 256, 0, 256])
         hist = cv2.normalize(hist, hist).flatten()
+    else:
+        raise ValueError(f"Invalid color_mode: {color_mode}")
     return hist

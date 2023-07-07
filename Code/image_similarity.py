@@ -8,10 +8,10 @@ from distance import euclidean_distance, manhattan_distance, cosine_similarity
 from plots import display_images
 
 
-def find_similar_images_faiss(index, image_paths, test_image_embedding, top_n):
+def find_similar_images_faiss(index, embeddings_df, test_image_embedding, top_n):
     D, I = index.search(np.array([test_image_embedding]), top_n)
-    top_faiss_paths = image_paths.iloc[I[0]].values
-    return top_faiss_paths
+    top_faiss_ids = embeddings_df.iloc[I[0]]['ID'].values
+    return top_faiss_ids
 
 def find_all_similarities(test_image_path, top_n=5, type='embeddings'):
     # Load image
@@ -25,11 +25,9 @@ def find_all_similarities(test_image_path, top_n=5, type='embeddings'):
     print("Test image embedding dimension:", test_image_embedding.shape)
     
     if type == 'embeddings':
-        merged_df = merge_embeddings_and_paths(embeddings_df, path_df)
-        index, image_paths = build_faiss_index(merged_df)
+        index = build_faiss_index(embeddings_df)
         print("FAISS index dimension:", index.d)
-        similar_image_paths = find_similar_images_faiss(index, image_paths, test_image_embedding, top_n)
-
+        similar_image_ids = find_similar_images_faiss(index, embeddings_df, test_image_embedding, top_n)
         
     elif type in ['hsv_euclidean', 'hsv_manhattan', 'hsv_cosine']:
         test_color = calculate_histogram(test_image, "hsv")
@@ -39,7 +37,7 @@ def find_all_similarities(test_image_path, top_n=5, type='embeddings'):
             top_images = manhattan_distance(hsv_df, test_color, top_n)
         elif type == 'hsv_cosine':
             top_images = cosine_similarity(hsv_df, test_color, top_n)
-        similar_image_paths = path_df[path_df['ID'].isin(top_images['ID'])]['Path'].values.tolist()
+        similar_image_ids = top_images['ID'].values.tolist()
     
     elif type in ['rgb_euclidean', 'rgb_manhattan', 'rgb_cosine']:
         test_color = calculate_histogram(test_image, "rgb")
@@ -49,6 +47,6 @@ def find_all_similarities(test_image_path, top_n=5, type='embeddings'):
             top_images = manhattan_distance(rgb_df, test_color, top_n)
         elif type == 'rgb_cosine':
             top_images = cosine_similarity(rgb_df, test_color, top_n)
-        similar_image_paths = path_df[path_df['ID'].isin(top_images['ID'])]['Path'].values.tolist()
-
-    display_images(test_image_path, similar_image_paths)
+        similar_image_ids = top_images['ID'].values.tolist()
+        
+    return similar_image_ids

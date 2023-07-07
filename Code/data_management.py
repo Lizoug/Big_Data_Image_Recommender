@@ -25,3 +25,8 @@ def build_faiss_index(embeddings_df):
     index = faiss.IndexFlatL2(dimension)
     index.add(embeddings)
     return index
+
+
+embeddings_df, hsv_df, rgb_df = load_dataframes()
+index = build_faiss_index(embeddings_df)
+    

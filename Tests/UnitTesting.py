@@ -16,7 +16,6 @@ import faiss
 from scipy.spatial import distance
 import sqlite3
 
-jgvjhjg
 #path = os.getcwd()
 #sys.path.append(r"C:\Users\magra\Documents\HSD\4_Semester\Big_Data\Image_Recommender")
 
